@@ -1,8 +1,17 @@
 # Computational Design of Passive and Active Kinesthetic Garments
-This is the official repository for the EuroGraphics '22 and UIST '22 papers
+![teaser](./figures/teaser.png)
+Given a set of motions and a compliant garment [optionally: with electrostatic clutches] our method automatically generates efficient connecting structures. 
 
-Given a set of motions and a compliant garment with electrostatic clutches our method automatically generates efficient connecting structures. 
-[teaser](./figures/teaser.png)
+
+#### This repository contains code for the papers:
+
+Computational Design of Kinesthetic Garments published at EuroGraphics '22. [Paper](https://arxiv.org/abs/2204.09996) | [Video](https://www.youtube.com/watch?v=yGkmTuoKAlU)
+Velko Vechev, Juan Zarate, Bernhard Thomaszewski, Otmar Hilliges
+
+Computational Design of Active Kinesthetic Garments published at UIST '22. [Paper](https://arxiv.org/abs/2210.07689) | [Video](https://www.youtube.com/watch?v=FC_VGT2wGk8)
+Velko Vechev, Ronan Hinchet, Stelian Coros, Bernhard Thomaszewski, Otmar Hilliges
+
+
 
 
 ## Install & Configure
@@ -74,7 +83,7 @@ Renderables describe the geometry (and parametric construction of geometry) for 
 
 Models are fairly generic formulations to compute energies used in the simulation and in the implementation of the BESO TPO algorithm.
 
-Note: `cs_tri` is used to compute energies for constant strain triangles, while `cs_tet` is for tetrehedral elements (which is not part of the paper, but I am including the code here).
+Note: `cs_tri.py` is used to compute energies for constant strain triangles. `cs_tet.py` is for tetrehedral elements, these are not part of the paper, but I am including the code here for tetrahedral simulations).
 
 
 ## Cite
@@ -82,7 +91,7 @@ Note: `cs_tri` is used to compute energies for constant strain triangles, while 
 Please cite our papers if you find them useful, or if you use the code in this repository:
 
 ```
-@inproceedings{vechev2022computational,
+@inproceedings{vechev2022computationalpassive,
   title={Computational Design of Kinesthetic Garments},
   author={Vechev, Velko and Zarate, Juan and Thomaszewski, Bernhard and Hilliges, Otmar},
   booktitle={Computer Graphics Forum},
@@ -93,7 +102,7 @@ Please cite our papers if you find them useful, or if you use the code in this r
   organization={Wiley Online Library}
 }
 
-@inproceedings{vechev2022computational,
+@inproceedings{vechev2022computationalactive,
   title={Computational Design of Active Kinesthetic Garments},
   author={Vechev, Velko and Hinchet, Ronan and Coros, Stelian and Thomaszewski, Bernhard and Hilliges, Otmar},
   booktitle={Proceedings of the 35th Annual ACM Symposium on User Interface Software and Technology},
@@ -104,4 +113,5 @@ Please cite our papers if you find them useful, or if you use the code in this r
 
 ## Acknowledgements
 This work was supported in part by grants from the Hasler Foundation (Switzerland) and funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme grant agreement No 717054.
+
 We would like to thank Manuel Kaufmann and Dario Mylonopoulos for their help with visualization support. We also want to thank Thomas Langerak for assistance during the deadlines.
