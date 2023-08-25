@@ -1,0 +1,22 @@
+# Datasets
+datasets:
+  amass: "../data"
+  kg: "../data"
+
+# Models
+star_models: "../models"
+
+# Pytorch configuration.
+device: "cuda:0" # use 'cpu' or 'cuda:0' depending on availability
+f_precision: 64  # simulation benefits greatly from double precision (f32 use may prevent convergence)
+i_precision: 64
+
+# Viewer.
+window_width: 1920
+window_height: 1080
+export_dir: '../export'
+
+#Topology Optimization Parameters
+tpo:
+  asr: 0.15  # Area Star (Target) ratio. I.e. what percent of the original area do we want remaining?
+  beso_iter: 150  # How many iterations to run the BESO algorithm
