@@ -16,12 +16,12 @@ if __name__ == '__main__':
     body = poses.poses_upper_body()
 
     # Modify an Existing Garment
-    garment = Garment.from_npz(os.path.join(C.datasets.kg, "garments_opt_uist_22/shirt_hr_arm_raise_opt.npz"), body)
+    garment = Garment.from_npz(os.path.join(C.datasets.kg, "garments/shirt.npz"), body)
     body.add_garment(garment)
 
     # Optionally add clutches to modify
-    # clutches = Clutches.from_npz(os.path.join(C.datasets.kg, "clutches/clutches_3.npz"), garment)
-    # garment.add(clutches)
+    clutches = Clutches.from_npz(os.path.join(C.datasets.kg, "clutches/clutches_3.npz"), garment)
+    garment.add(clutches)
 
 
     v = KGViewer()

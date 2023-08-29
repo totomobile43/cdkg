@@ -15,6 +15,7 @@ setup(name='CDKG',
       python_requires='>=3.7',
       install_requires=[
             'aitviewer>=1.11',
-            'pytorch3d>=0.4.0'
+            'pytorch3d>=0.4.0',
+            'plotly'
           ],
       )

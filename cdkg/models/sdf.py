@@ -2,6 +2,7 @@ import torch
 from pytorch3d.ops import knn_points
 from cdkg.configuration import CONFIG as C
 
+
 class SDF(torch.nn.Module):
     """
     Given a mesh and a point cloud, apply a loss on the points which are inside the mesh.
@@ -14,7 +15,7 @@ class SDF(torch.nn.Module):
         # Body
         self.vertices = vertices.to(device=C.device, dtype=C.f_precision)
         self.vertex_normals = vertex_normals.to(device=C.device, dtype=C.f_precision)
-        self.support_radii = (knn_points(self.vertices, self.vertices, K=7).dists[..., 1:]).mean(-1) * 2.0
+        self.support_radii = (knn_points(self.vertices.to(torch.float32), self.vertices.to(torch.float32), K=7).dists[..., 1:]).mean(-1) * 2.0
         self.knn_K = knn_K
 
         # Cache
@@ -39,6 +40,8 @@ class SDF(torch.nn.Module):
         :param lengths: Lengths of the query points (only if each batch dimension has different lengths)
         :return: Signed distance values for each query point to the surface
         '''
+
+        # return torch.pow(points, 2).sum()
 
         # Add batch dimension if missing
         points = points.unsqueeze(0) if len(points.shape) == 2 else points
@@ -65,7 +68,7 @@ class SDF(torch.nn.Module):
             self.knn_idx = knn_points(points.unsqueeze(0), vertices_ref, K=self.knn_K).idx
             self.knn_idx = self.knn_idx.unsqueeze(0).tile((len(self), 1, 1))
         else:
-            self.knn_idx = knn_points(points, self.vertices, K=self.knn_K).idx
+            self.knn_idx = knn_points(points.to(torch.float32), self.vertices.to(torch.float32), K=self.knn_K).idx
 
         # Indices are a multidimensional mask. To apply mask: Flatten -> Select -> Unflatten
         indices = self.knn_idx.view(len(self), -1) + torch.arange(0, self.vertices.shape[1] * len(self),
@@ -103,3 +106,5 @@ class SDF(torch.nn.Module):
 
     def __len__(self):
         return self.vertices.shape[0]
+
+

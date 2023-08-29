@@ -2,6 +2,7 @@ import os
 from cdkg.renderables.garment import Garment
 from cdkg.renderables.body import Body
 from aitviewer.models.star import STARLayer
+from aitviewer.configuration import CONFIG as AVC
 from cdkg.models.beso import BESO
 from cdkg.configuration import CONFIG as C
 from cdkg.models.garment_on_body import GarmentOnBody
@@ -12,6 +13,8 @@ import cdkg.poses as poses
 
 if __name__ == '__main__':
     """Runs On-Body Topology Optimization"""
+
+    AVC.update_conf(C.conf)
 
     # Models
     garment_on_body = GarmentOnBody(w_attach=0.003)
@@ -29,13 +32,13 @@ if __name__ == '__main__':
         name=body.name
     )
 
-    garment = Garment.from_npz(os.path.join(C.datasets.kg, "garments/shirt_long.npz"), body)
-    clutches = Clutches.from_npz(os.path.join(C.datasets.kg, "clutches/shirt_long_clutches_6.npz"), garment)
+    garment = Garment.from_npz(os.path.join(C.datasets.kg, "garments/shirt.npz"), body)
+    clutches = Clutches.from_npz(os.path.join(C.datasets.kg, "clutches/clutches_3.npz"), garment)
     clutches.states[:n_motions] = 0.1
     garment.add(clutches)
 
     # Prep
-    experiment_name = garment.name + "_" + clutches.name + "_asr" + C.tpo.asr
+    experiment_name = garment.name + "_" + clutches.name + "_asr_" + str(C.tpo.asr)
     print("Experiment: " + experiment_name)
 
     # Create experiment dir if not exists
